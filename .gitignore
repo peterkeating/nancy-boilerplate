@@ -1,0 +1,32 @@
+# Files to be ignored for Visual Studio can be found from the link below.
+# https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+# build results
+
+[Dd]ebug/
+[Rr]elease/
+x64/
+[Bb]in/
+[Oo]bj/
+
+# user settings file.
+
+*.suo
+*.user
+
+# directories used by NuGET
+
+packages/
+
+# ignoring log files.
+
+*.log
+
+# files created by developer tools.
+
+# ncrunch files
+*.ncrunch*
+*ncrunchtemp*
+*_ncrunch_*
+
+Thumbs.db
