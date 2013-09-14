@@ -17,6 +17,7 @@ x64/
 # directories used by NuGET
 
 packages/
+NuGet.exe
 
 # ignoring log files.
 
