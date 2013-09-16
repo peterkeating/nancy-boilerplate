@@ -9,11 +9,24 @@ using System.IO;
 
 namespace NancyBoilerplate.Tests.Unit.Modules
 {
-    public class CustomRootPathProvider : IRootPathProvider
+    public class TestingRootPathProvider : IRootPathProvider
     {
+        private static readonly string RootPath;
+
+        static TestingRootPathProvider()
+        {
+            var directoryName = Path.GetDirectoryName(typeof(Bootstrapper).Assembly.CodeBase);
+
+            if (directoryName != null)
+            {
+                var assemblyPath = directoryName.Replace(@"file:\", string.Empty);
+                RootPath = Path.Combine(assemblyPath, "..", "..", "..", "NancyBoilerplate");
+            }
+        }
+
         public string GetRootPath()
         {
-            return Path.GetDirectoryName(typeof(Bootstrapper).Assembly.Location);
+            return RootPath;
         }
     }
 
@@ -32,7 +45,7 @@ namespace NancyBoilerplate.Tests.Unit.Modules
             {
                 with.Module<TModule>();
                 with.NancyEngine<NancyEngine>();
-                with.RootPathProvider<CustomRootPathProvider>();
+                with.RootPathProvider<TestingRootPathProvider>();
             });
         }
 
