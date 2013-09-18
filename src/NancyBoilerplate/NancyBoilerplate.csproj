@@ -80,10 +80,6 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Core\Config.cs" />
-    <Compile Include="Migrations\201309182132282_Initial.cs" />
-    <Compile Include="Migrations\201309182132282_Initial.Designer.cs">
-      <DependentUpon>201309182132282_Initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\MigrationsConfig.cs" />
     <Compile Include="Migrations\MigrationsDbContext.cs" />
     <Compile Include="Modules\HomeModule.cs" />
@@ -98,11 +94,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309182132282_Initial.resx">
-      <DependentUpon>201309182132282_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
