@@ -9,6 +9,11 @@ x64/
 [Bb]in/
 [Oo]bj/
 
+# build process artefacts.
+
+dist/
+intermediate/
+
 # user settings file.
 
 *.suo

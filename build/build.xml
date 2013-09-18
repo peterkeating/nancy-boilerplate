@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+<project name="NancyBoilerplate" default="build" basedir="../">
+
+    <!--
+        Gives access to environment variables.
+    -->
+    <property environment="ENV" />
+
+    <!--
+        Loads the project specific configuration values.
+    -->
+    <property file="build/config/project.properties" />
+
+    <!--
+        Load in Ant-Contrib to give us access to some very useful tasks!
+        Learn more about Ant-Contrib and the extra functionality it offers from
+        the link below.
+
+        - http://ant-contrib.sourceforge.net/
+    -->
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="${tool.antcontrib}" />
+        </classpath>
+    </taskdef>
+
+    <!--
+        Load in ant-dotnet to allow us to run NAnt build scripts.
+    -->
+    <taskdef resource="org/apache/ant/dotnet/antlib.xml">
+        <classpath>
+            <pathelement location="${tool.antdotnet}" />
+        </classpath>
+    </taskdef>
+
+    <!--
+        Default target that builds the application ending with the project ready
+        to be distributed.
+    -->
+    <target name="build" depends="-clean, -prepare, -copy, -compile, -tests, -compile-release, -publish, -tidy" />
+
+    <!--
+        Removes any previous artefacts from previous build attempts.
+    -->
+    <target name="-clean">
+        <delete dir="${dist.dir}" />
+        <delete dir="${intermediate.dir}" />
+    </target>
+
+    <!--
+        Create any directories needed during the build task.
+    -->
+    <target name="-prepare">
+        <mkdir dir="${dist.dir}" />
+        <mkdir dir="${test.reports.dir}" />
+        <mkdir dir="${intermediate.dir}" />
+    </target>
+
+    <!--
+        Files are copied from the src directory into an intermediate directory.
+        This ensures that the src files are not manipulated in a way that would
+        cause them to change and potentially break the product.
+
+        Also by copying the files into a middle man directory any changes made
+        doesn't trigger a change that would be picked up by any version control
+        solutions that might be running.
+
+        The intermediate directory should be ignored by any version control solutions.
+    -->
+    <target name="-copy">
+        <copy todir="${intermediate.dir}">
+            <fileset dir="${src.dir}" />
+        </copy>
+    </target>
+
+    <!--
+        Compiles the solution to ensure there are no errors before we continue
+        any further. Any errors will cause the build to fail.
+    -->
+    <target name="-compile">
+        <nant buildfile="${nant.buildfile}">
+            <target name="compile" />
+        </nant>
+    </target>
+
+    <!--
+        Runs all the tests for the project.
+    -->
+    <target name="-tests">
+        <nant buildfile="${nant.buildfile}">
+            <target name="tests" />
+        </nant>
+    </target>
+
+    <!--
+        Compiles a release version of the solution, means all the debug information
+        will be removed.
+    -->
+    <target name="-compile-release">
+        <nant buildfile="${nant.buildfile}">
+            <target name="compile-release" />
+        </nant>
+    </target>
+
+    <!--
+        Publishes the intermediate project into a files ready to be deployed as
+        a website.
+    -->
+    <target name="-publish">
+        <copy todir="${publish.dir}">
+            <fileset dir="${intermediate.dir}/${project.name}">
+                <exclude name="/obj/**" />
+                <exclude name="packages.config" />
+                <exclude name="*.csproj.user" />
+                <exclude name="*.csproj" />
+                <exclude name="**/*.cs" />
+                <exclude name="**/*.pdb" />
+            </fileset>
+        </copy>
+    </target>
+
+    <!--
+        Removes the directories and files that are no longer required.
+    -->
+    <target name="-tidy">
+        <delete dir="${intermediate.dir}" />
+
+        <!-- removes any empty directories. -->
+        <delete includeemptydirs="true">
+            <fileset dir="${publish.dir}">
+                <and>
+                    <size value="0"/>
+                    <type type="dir"/>
+                </and>
+            </fileset>
+        </delete>
+    </target>
+</project>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project name="ee-live-nant" basedir="..\">
+
+    <property name="basedir" value="${project::get-base-directory()}" />
+
+    <!--
+        Helpful features to enhance NAnt.
+    -->
+    <loadtasks>
+        <fileset>
+            <include name="${basedir}/build/tools/nantcontrib-0.91-rc1/libs/NAnt.Contrib.Tasks.dll" />
+        </fileset>
+    </loadtasks>
+
+    <!--
+        Loads the project specific configuration values.
+    -->
+    <loadproperties file="${basedir}/build/config/project.properties" />
+
+    <!--
+        Compiles the solution to ensure there are no compile errors.
+    -->
+    <target name="compile">
+        <exec program="${framework::get-framework-directory(framework.version)}\MSBuild.exe"
+              commandline='"${solution.file}" /t:Clean,Build /p:Platform="Any CPU" /noconsolelogger'
+              workingdir="."
+              failonerror="true"/>
+    </target>
+
+    <!--
+        Compiles the solution with a release configuration.
+     -->
+    <target name="compile-release">
+        <exec program="${framework::get-framework-directory(framework.version)}\MSBuild.exe"
+              commandline='"${solution.file}" /t:Clean,Rebuild /p:Configuration=Release /p:Platform="Any CPU" /noconsolelogger'
+              workingdir="."
+              failonerror="true"/>
+    </target>
+
+    <!--
+        Runs the unit tests.
+    -->
+    <target name="tests">
+        <exec   workingdir='.'
+                program="${tool.nunit}"
+                commandline='"${unit.tests.dll}" /xml:"${test.reports.dir}\unit-tests.xml"'
+                failonerror="true"  />
+    </target>
+
+    <!--
+        Updates the Web.config so it is ready for production.
+    -->
+    <target name="configuration">
+        <!--
+        Disable running in debug binaries.
+        http://blogs.msdn.com/b/tess/archive/2006/04/13/575364.aspx
+        -->
+        <xmlpoke    file="${intermediate.dir}/${project.name}/Web.config"
+                    xpath="/configuration/system.web/compilation/@debug"
+                    value="false" />
+    </target>
+</project>
