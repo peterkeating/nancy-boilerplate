@@ -13,6 +13,8 @@ x64/
 
 dist/
 intermediate/
+BUILDNUMBER
+LASTBUILD
 
 # user settings file.
 

@@ -10,7 +10,12 @@
     <!--
         Loads the project specific configuration values.
     -->
-    <property file="build/config/project.properties" />
+    <property file="${basedir}/build/config/project.properties" />
+
+    <!--
+        Loads the version of the last build.
+    -->
+    <property file="${basedir}/LASTBUILD" />
 
     <!--
         Load in Ant-Contrib to give us access to some very useful tasks!
@@ -38,7 +43,9 @@
         Default target that builds the application ending with the project ready
         to be distributed.
     -->
-    <target name="build" depends="-clean, -prepare, -copy, -compile, -tests, -compile-release, -publish, -tidy" />
+    <target name="build" depends="-clean, -prepare, -version, -copy, -compile, -tests, -compile-release, -publish, -tidy" />
+
+    <target name="testing" depends="-clean, -prepare, -version, -tidy" />
 
     <!--
         Removes any previous artefacts from previous build attempts.
@@ -54,6 +61,26 @@
     <target name="-prepare">
         <mkdir dir="${dist.dir}" />
         <mkdir dir="${intermediate.dir}" />
+    </target>
+
+    <target name="-version">
+        <!--
+            If the last build version doesn't match the current project version
+            properties then the build number needs to be reset to 0. This is done
+            by deleting the buildnumber file thus reseting the build.number property
+            back to 0.
+        -->
+        <if>
+            <equals arg1="${build.last}" arg2="${project.major.version}.${project.minor.version}" />
+            <then></then>
+            <else>
+                <delete file="${basedir}/BUILDNUMBER" />
+            </else>
+        </if>
+
+        <buildnumber file="BUILDNUMBER" />
+        <property name="project.version" value="${project.major.version}.${project.minor.version}.${build.number}" />
+        <echo>Building v${project.version}</echo>
     </target>
 
     <!--
@@ -141,5 +168,12 @@
     <target name="-tidy">
         <delete dir="${intermediate.dir}" />
         <delete dir="${publish.dir}" />
+
+        <!--
+            Saves the build version number so it can be compared in future build
+            processes to see if the build number for the version number needs to
+            be reset back to 0.
+        -->
+        <echo file="LASTBUILD">build.last=${project.major.version}.${project.minor.version}</echo>
     </target>
 </project>
