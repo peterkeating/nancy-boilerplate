@@ -70,7 +70,10 @@
     -->
     <target name="-copy">
         <copy todir="${intermediate.dir}">
-            <fileset dir="${src.dir}" />
+            <fileset dir="${src.dir}">
+                <exclude name="**/obj/**" />
+                <exclude name="**/bin/**" />
+            </fileset>
         </copy>
     </target>
 
