@@ -43,7 +43,12 @@
     <target name="tests">
         <exec   workingdir='.'
                 program="${tool.nunit}"
-                commandline='"${unit.tests.dll}" /xml:"${test.reports.dir}\unit-tests.xml"'
+                commandline='"${unit.tests.dll}" /xml:"${test.reports.dir}\tests-unit.xml"'
+                failonerror="true"  />
+
+        <exec   workingdir='.'
+                program="${tool.nunit}"
+                commandline='"${integration.tests.dll}" /xml:"${test.reports.dir}\tests-integration.xml"'
                 failonerror="true"  />
     </target>
 
