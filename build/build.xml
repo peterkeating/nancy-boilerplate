@@ -53,7 +53,6 @@
     -->
     <target name="-prepare">
         <mkdir dir="${dist.dir}" />
-        <mkdir dir="${test.reports.dir}" />
         <mkdir dir="${intermediate.dir}" />
     </target>
 
