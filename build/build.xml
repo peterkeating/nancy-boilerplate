@@ -111,6 +111,7 @@
         a website.
     -->
     <target name="-publish">
+
         <copy todir="${publish.dir}">
             <fileset dir="${intermediate.dir}/${project.name}">
                 <exclude name="/obj/**" />
@@ -121,13 +122,6 @@
                 <exclude name="**/*.pdb" />
             </fileset>
         </copy>
-    </target>
-
-    <!--
-        Removes the directories and files that are no longer required.
-    -->
-    <target name="-tidy">
-        <delete dir="${intermediate.dir}" />
 
         <!-- removes any empty directories. -->
         <delete includeemptydirs="true">
@@ -138,5 +132,15 @@
                 </and>
             </fileset>
         </delete>
+
+        <zip destfile="${dist.dir}/site.zip" basedir="${publish.dir}" />
+    </target>
+
+    <!--
+        Removes the directories and files that are no longer required.
+    -->
+    <target name="-tidy">
+        <delete dir="${intermediate.dir}" />
+        <delete dir="${publish.dir}" />
     </target>
 </project>
