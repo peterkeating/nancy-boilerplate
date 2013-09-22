@@ -159,7 +159,7 @@
             </fileset>
         </delete>
 
-        <zip destfile="${dist.dir}/site.zip" basedir="${publish.dir}" />
+        <zip destfile="${dist.dir}/site-${project.version}.zip" basedir="${publish.dir}" />
     </target>
 
     <!--
