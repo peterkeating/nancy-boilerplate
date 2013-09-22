@@ -16,6 +16,15 @@ intermediate/
 BUILDNUMBER
 LASTBUILD
 
+# nodejs files used for front end development.
+
+node_modules/
+
+# CSS related files.
+
+.sass-cache/
+*.css
+
 # user settings file.
 
 *.suo
