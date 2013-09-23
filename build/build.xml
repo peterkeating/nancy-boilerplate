@@ -99,6 +99,8 @@
             <fileset dir="${src.dir}">
                 <exclude name="**/obj/**" />
                 <exclude name="**/bin/**" />
+                <exclude name="**/node_modules/**" />
+                <exclude name="**/.sass-cache/**" />
             </fileset>
         </copy>
     </target>
@@ -146,6 +148,11 @@
                 <exclude name="*.csproj" />
                 <exclude name="**/*.cs" />
                 <exclude name="**/*.pdb" />
+                <exclude name="/node_modules/**" />
+                <exclude name="/.sass-cache/**" />
+                <exclude name="**/package.json" />
+                <exclude name="**/gruntfile.js" />
+                <exclude name="**/*.scss" />
             </fileset>
         </copy>
 
