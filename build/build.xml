@@ -43,7 +43,7 @@
         Default target that builds the application ending with the project ready
         to be distributed.
     -->
-    <target name="build" depends="-clean, -prepare, -version, -copy, -compile, -tests, -compile-release, -publish, -tidy" />
+    <target name="build" depends="-clean, -prepare, -version, -copy, -config, -compile, -tests, -compile-release, -frontend, -publish, -tidy" />
 
     <!--
         Removes any previous artefacts from previous build attempts.
@@ -99,8 +99,17 @@
                 <exclude name="**/bin/**" />
                 <exclude name="**/node_modules/**" />
                 <exclude name="**/.sass-cache/**" />
+                <exclude name="**/*.css" />
             </fileset>
         </copy>
+    </target>
+
+    <!--
+        Makes any amendments to source files that require changes for the production
+        environment, e.g. applying of version numbers.
+    -->
+    <target name="-config">
+        <replace file="${intermediate.dir}/${project.name}/package.json" token='&quot;version&quot;: &quot;0.0.0&quot;' value='&quot;version&quot;: &quot;${project.version}&quot;' />
     </target>
 
     <!--
@@ -133,11 +142,29 @@
     </target>
 
     <!--
+        Fetches dependencies for the front end build process via Grunt. Once the
+        dependencies have been fetched, the Grunt script is run.
+    -->
+    <target name="-frontend">
+        <!--
+            Fetches dependencies via NPM (http://npmjs.org).
+        -->
+        <exec executable="cmd" dir="${intermediate.dir}/${project.name}" failonerror="true">
+            <arg value="/c"/>
+            <arg value="npm install"/>
+        </exec>
+
+        <exec executable="cmd" dir="${intermediate.dir}/${project.name}" failonerror="true">
+            <arg value="/c"/>
+            <arg value="grunt.cmd dist"/>
+        </exec>
+    </target>
+
+    <!--
         Publishes the intermediate project into a files ready to be deployed as
         a website.
     -->
     <target name="-publish">
-
         <copy todir="${publish.dir}">
             <fileset dir="${intermediate.dir}/${project.name}">
                 <exclude name="/obj/**" />
@@ -171,7 +198,7 @@
         Removes the directories and files that are no longer required.
     -->
     <target name="-tidy">
-        <delete dir="${intermediate.dir}" />
+        <!--<delete dir="${intermediate.dir}" />-->
         <delete dir="${publish.dir}" />
 
         <!--
