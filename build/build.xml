@@ -45,8 +45,6 @@
     -->
     <target name="build" depends="-clean, -prepare, -version, -copy, -compile, -tests, -compile-release, -publish, -tidy" />
 
-    <target name="testing" depends="-clean, -prepare, -version, -tidy" />
-
     <!--
         Removes any previous artefacts from previous build attempts.
     -->
