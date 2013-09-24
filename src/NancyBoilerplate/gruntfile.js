@@ -14,6 +14,7 @@ module.exports = function(grunt) {
      * Configuring the tasks available for the build process.
      */
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
         /**
          * Analyses JavaScript files using JSHint for errors or potential problems.
@@ -28,6 +29,24 @@ module.exports = function(grunt) {
             ],
             options: {
                 jshintrc: '.jshintrc'
+            }
+        },
+
+        /**
+         * Optimizes the JavaScript into a single file using the r.js optimizer.
+         */
+        requirejs: {
+            compile: {
+                options: {
+                    name: 'main',
+                    mainConfigFile: 'assets/js/config.js',
+                    paths: {
+                        requireJS: 'vendor/require'
+                    },
+                    include: 'requireJS',
+                    preserveLicenseComments: false,
+                    out: 'assets/js/boilerpate-<%= pkg.version %>.js'
+                }
             }
         },
 
@@ -60,9 +79,10 @@ module.exports = function(grunt) {
      */
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     /**
      * Organises the front end assets ready for a production environment.
      */
-    grunt.registerTask('dist', ['jshint', 'sass:dist']);
+    grunt.registerTask('dist', ['jshint', 'sass:dist', 'requirejs']);
 };
