@@ -16,6 +16,22 @@ module.exports = function(grunt) {
     grunt.initConfig({
 
         /**
+         * Analyses JavaScript files using JSHint for errors or potential problems.
+         * You can customise the parameters by modifying the .jshintrc file.
+         * - http://jshint.com/
+         */
+        jshint: {
+            all: [
+                'gruntfile.js',
+                'assets/js/**/*.js',
+                '!assets/js/vendor/**/*.js'
+            ],
+            options: {
+                jshintrc: '.jshintrc'
+            }
+        },
+
+        /**
          * Compiles Sass into a CSS file.
          */
         sass: {
@@ -43,9 +59,10 @@ module.exports = function(grunt) {
      * Loads libraries to assist with the build process.
      */
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     /**
      * Organises the front end assets ready for a production environment.
      */
-    grunt.registerTask('dist', ['sass:dist']);
+    grunt.registerTask('dist', ['jshint', 'sass:dist']);
 };
