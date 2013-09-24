@@ -154,6 +154,10 @@
             <arg value="npm install"/>
         </exec>
 
+        <!--
+            Runs the `dist` task in the Grunt file which handles validation and
+            organising assets optimizing for a production environment.
+        -->
         <exec executable="cmd" dir="${intermediate.dir}/${project.name}" failonerror="true">
             <arg value="/c"/>
             <arg value="grunt.cmd dist"/>
@@ -165,6 +169,9 @@
         a website.
     -->
     <target name="-publish">
+        <!--
+            Copies all the required files to the publish directory.
+        -->
         <copy todir="${publish.dir}">
             <fileset dir="${intermediate.dir}/${project.name}">
                 <exclude name="/obj/**" />
@@ -175,9 +182,21 @@
                 <exclude name="**/*.pdb" />
                 <exclude name="/node_modules/**" />
                 <exclude name="/.sass-cache/**" />
-                <exclude name="**/package.json" />
-                <exclude name="**/gruntfile.js" />
+                <exclude name="package.json" />
+                <exclude name="gruntfile.js" />
                 <exclude name="**/*.scss" />
+                <exclude name="**/*.js" />
+                <exclude name=".jshintrc" />
+            </fileset>
+        </copy>
+
+        <!--
+            Seperate from the copy target above due to the exclusion of js files
+            preventing the distributable from being copied across.
+        -->
+        <copy todir="${publish.dir}">
+            <fileset dir="${intermediate.dir}/${project.name}">
+                <include name="**/*boilerplate-*.js" />
             </fileset>
         </copy>
 
