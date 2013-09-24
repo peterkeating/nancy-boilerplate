@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'assets/css/styles.css': 'assets/css/styles.scss'
+                    'assets/css/styles-<%= pkg.version %>.css': 'assets/css/styles.scss'
                 }
             }
         },
@@ -92,6 +92,16 @@ module.exports = function(grunt) {
                         {
                             pattern: '<script data-main="assets/js/config" src="assets/js/vendor/require.js"></script>',
                             replacement: '<script src="assets/js/boilerplate-<%= pkg.version %>.js"></script>'
+                        },
+
+                        /**
+                         * Updates style sheet declaration to load in the cache
+                         * busting CSS file to ensure the visiting user has the
+                         * latest styles.
+                         */
+                        {
+                            pattern: '<link rel="stylesheet" href="assets/css/styles.css" />',
+                            replacement: '<link rel="stylesheet" href="assets/css/styles-<%= pkg.version %>.css" />'
                         }
                     ]
                 }
