@@ -71,6 +71,31 @@ module.exports = function(grunt) {
                     'assets/css/styles.css': 'assets/css/styles.scss'
                 }
             }
+        },
+
+        /**
+         * Updates the URLs to assets in the mark-up files.
+         */
+        'string-replace': {
+            dist: {
+                files: {
+                    'Views/Shared/_Layout.cshtml': 'Views/Shared/_Layout.cshtml'
+                },
+                options: {
+                    replacements: [
+
+                        /**
+                         * All the JS is now in a single file to reduce HTTP requests so
+                         * the AMD loading via requireJS can be replaced by a traditional
+                         * loading a single JS file.
+                         */
+                        {
+                            pattern: '<script data-main="assets/js/config" src="assets/js/vendor/require.js"></script>',
+                            replacement: '<script src="assets/js/boilerplate-<%= pkg.version %>.js"></script>'
+                        }
+                    ]
+                }
+            }
         }
     });
 
@@ -80,9 +105,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-string-replace');
 
     /**
      * Organises the front end assets ready for a production environment.
      */
-    grunt.registerTask('dist', ['jshint', 'sass:dist', 'requirejs']);
+    grunt.registerTask('dist', ['jshint', 'sass:dist', 'requirejs', 'string-replace']);
 };
