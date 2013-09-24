@@ -198,7 +198,7 @@
         Removes the directories and files that are no longer required.
     -->
     <target name="-tidy">
-        <!--<delete dir="${intermediate.dir}" />-->
+        <delete dir="${intermediate.dir}" />
         <delete dir="${publish.dir}" />
 
         <!--
