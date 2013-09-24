@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                     },
                     include: 'requireJS',
                     preserveLicenseComments: false,
-                    out: 'assets/js/boilerpate-<%= pkg.version %>.js'
+                    out: 'assets/js/boilerplate-<%= pkg.version %>.js'
                 }
             }
         },
