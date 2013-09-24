@@ -84,7 +84,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\css\partials\vendor\_normalize.scss" />
+    <Content Include="assets\css\styles.scss" />
     <None Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="assets\css\styles.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
