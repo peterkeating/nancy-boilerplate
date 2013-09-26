@@ -217,6 +217,8 @@
         </delete>
 
         <zip destfile="${dist.dir}/site-${project.version}.zip" basedir="${publish.dir}" />
+
+        <echo file="${dist.dir}/VERSION">project.version=${project.version}</echo>
     </target>
 
     <!--
