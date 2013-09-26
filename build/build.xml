@@ -110,6 +110,12 @@
     -->
     <target name="-config">
         <replace file="${intermediate.dir}/${project.name}/package.json" token='&quot;version&quot;: &quot;0.0.0&quot;' value='&quot;version&quot;: &quot;${project.version}&quot;' />
+
+        <!--
+            Swap Web.config used for serving configuration files to one that has
+            an aggressive caching strategy.
+        -->
+        <copy file="${build.dir}/server-configs/StaticFiles.Web.config" tofile="${intermediate.dir}/${project.name}/assets/Web.config" overwrite="true" />
     </target>
 
     <!--
