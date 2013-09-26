@@ -68,17 +68,5 @@ namespace NancyBoilerplate.Tests.Unit.Modules
             Browser = new Browser(Bootstrapper);
             Response = Browser.Post(path, browserContext);
         }
-
-        /// <summary>
-        /// Sets up the mock response that would be handle in the real application by
-        /// Razor, however
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="htmlResponse"></param>
-        public void SetView(string path, HtmlResponse htmlResponse)
-        {
-            AutoMoqer.GetMock<IViewFactory>().Setup(v => v.RenderView(path, It.IsAny<object>(), It.IsAny<ViewLocationContext>()))
-                       .Returns(htmlResponse);
-        }
     }
 }
