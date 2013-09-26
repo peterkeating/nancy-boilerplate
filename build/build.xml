@@ -191,12 +191,12 @@
         </copy>
 
         <!--
-            Seperate from the copy target above due to the exclusion of js files
+            Separate from the copy target above due to the exclusion of js files
             preventing the distributable from being copied across.
         -->
         <copy todir="${publish.dir}">
             <fileset dir="${intermediate.dir}/${project.name}">
-                <include name="**/*boilerplate-*.js" />
+                <include name="**/*js-*.js" />
             </fileset>
         </copy>
 

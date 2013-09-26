@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                     },
                     include: 'requireJS',
                     preserveLicenseComments: false,
-                    out: 'assets/js/boilerplate-<%= pkg.version %>.js'
+                    out: 'assets/js/js-<%= pkg.version %>.js'
                 }
             }
         },
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'assets/css/styles-<%= pkg.version %>.css': 'assets/css/styles.scss'
+                    'assets/css/css-<%= pkg.version %>.css': 'assets/css/styles.scss'
                 }
             }
         },
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
                          */
                         {
                             pattern: '<script data-main="assets/js/config" src="assets/js/vendor/require.js"></script>',
-                            replacement: '<script src="assets/js/boilerplate-<%= pkg.version %>.js"></script>'
+                            replacement: '<script src="assets/js/js-<%= pkg.version %>.js"></script>'
                         },
 
                         /**
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
                          */
                         {
                             pattern: '<link rel="stylesheet" href="assets/css/styles.css" />',
-                            replacement: '<link rel="stylesheet" href="assets/css/styles-<%= pkg.version %>.css" />'
+                            replacement: '<link rel="stylesheet" href="assets/css/css-<%= pkg.version %>.css" />'
                         }
                     ]
                 }
