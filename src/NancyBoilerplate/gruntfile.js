@@ -106,6 +106,25 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+
+        watch: {
+            /**
+             * Any changes made to a .scss file in the project trigger a conversion
+             * of Sass to CSS.
+             */
+            sass: {
+                files: 'assets/**/*.scss',
+                tasks: ['sass:dev']
+            },
+
+            /**
+             * Any changes to JavaScript files triggers the test suite to be tested.
+             */
+            js: {
+                files: 'assets/**/*.js',
+                tasks: ['jshint']
+            }
         }
     });
 
@@ -116,6 +135,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-string-replace');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    grunt.registerTask('default', ['watch']);
 
     /**
      * Organises the front end assets ready for a production environment.
