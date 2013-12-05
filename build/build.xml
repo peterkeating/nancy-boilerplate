@@ -43,7 +43,7 @@
         Default target that builds the application ending with the project ready
         to be distributed.
     -->
-    <target name="build" depends="-clean, -prepare, -version, -copy, -config, -compile, -tests, -compile-release, -frontend, -publish, -tidy" />
+    <target name="build" depends="-clean, -prepare, -version, -dependencies, -copy, -config, -compile, -tests, -compile-release, -frontend, -publish, -tidy" />
 
     <!--
         Removes any previous artefacts from previous build attempts.
@@ -82,6 +82,17 @@
     </target>
 
     <!--
+        Fetches front end dependencies from NPM.
+        http://npmjs.org
+    -->
+    <target name="-dependencies">
+        <exec executable="cmd" dir="${src.dir}/${project.name}" failonerror="true">
+            <arg value="/c"/>
+            <arg value="npm install"/>
+        </exec>
+    </target>
+
+    <!--
         Files are copied from the src directory into an intermediate directory.
         This ensures that the src files are not manipulated in a way that would
         cause them to change and potentially break the product.
@@ -96,8 +107,9 @@
         <copy todir="${intermediate.dir}">
             <fileset dir="${src.dir}">
                 <exclude name="**/obj/**" />
-                <exclude name="**/bin/**" />
-                <exclude name="**/node_modules/**" />
+                <exclude name="**/${project.name}/bin/**" />
+                <exclude name="**/bin/Debug/**" />
+                <exclude name="**/bin/Release/**" />
                 <exclude name="**/.sass-cache/**" />
                 <exclude name="**/*.css" />
             </fileset>
@@ -152,14 +164,6 @@
         dependencies have been fetched, the Grunt script is run.
     -->
     <target name="-frontend">
-        <!--
-            Fetches dependencies via NPM (http://npmjs.org).
-        -->
-        <exec executable="cmd" dir="${intermediate.dir}/${project.name}" failonerror="true">
-            <arg value="/c"/>
-            <arg value="npm install"/>
-        </exec>
-
         <!--
             Runs the `dist` task in the Grunt file which handles validation and
             organising assets optimizing for a production environment.
@@ -225,8 +229,8 @@
         Removes the directories and files that are no longer required.
     -->
     <target name="-tidy">
-        <delete dir="${intermediate.dir}" />
-        <delete dir="${publish.dir}" />
+        <delete dir="${intermediate.dir}" failonerror="false" />
+        <delete dir="${publish.dir}" failonerror="false" />
 
         <!--
             Saves the build version number so it can be compared in future build
