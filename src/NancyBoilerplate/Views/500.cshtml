@@ -1,0 +1,26 @@
+﻿@using Nancy.Helpers;
+
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+@{
+    Layout = "Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align: center;">
+    <h1>Something went wrong.</h1>
+    <p><a href="/">Go to Home Page.</a></p>
+</div>
+
+@{
+    if (RenderContext.Context.Items.ContainsKey("ERROR_TRACE")) {
+<!--
+
+    Below is the details of the server error.
+    -------------------------------------------
+    @HttpUtility.HtmlEncode(RenderContext.Context.Items["ERROR_TRACE"].ToString())
+    --------------------------------------------
+
+-->
+    }
+}
+

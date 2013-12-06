@@ -87,6 +87,7 @@
     <Content Include="assets\css\partials\vendor\_normalize.scss" />
     <Content Include="assets\css\styles.scss" />
     <Content Include="Views\404.cshtml" />
+    <Content Include="Views\500.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="assets\css\styles.css" />
     <Content Include="Web.config" />
@@ -99,6 +100,7 @@
     <Compile Include="Core\Domain\Mappings\UserMapping.cs" />
     <Compile Include="Core\Domain\User.cs" />
     <Compile Include="Core\Handlers\404Handler.cs" />
+    <Compile Include="Core\Handlers\500Handler.cs" />
     <Compile Include="Migrations\201309192241184_Initial.cs" />
     <Compile Include="Migrations\201309192241184_Initial.Designer.cs">
       <DependentUpon>201309192241184_Initial.cs</DependentUpon>
