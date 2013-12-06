@@ -86,6 +86,7 @@
   <ItemGroup>
     <Content Include="assets\css\partials\vendor\_normalize.scss" />
     <Content Include="assets\css\styles.scss" />
+    <Content Include="Views\404.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="assets\css\styles.css" />
     <Content Include="Web.config" />
@@ -97,6 +98,7 @@
     <Compile Include="Core\Domain\Mappings\MappingConfig.cs" />
     <Compile Include="Core\Domain\Mappings\UserMapping.cs" />
     <Compile Include="Core\Domain\User.cs" />
+    <Compile Include="Core\Handlers\404Handler.cs" />
     <Compile Include="Migrations\201309192241184_Initial.cs" />
     <Compile Include="Migrations\201309192241184_Initial.Designer.cs">
       <DependentUpon>201309192241184_Initial.cs</DependentUpon>
@@ -134,9 +136,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>55733</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57243/</IISUrl>
+          <IISUrl>http://localhost:57244/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
