@@ -121,7 +121,13 @@
         environment, e.g. applying of version numbers.
     -->
     <target name="-config">
+        <!--
+            Handles applying the version number of this build to various files in
+            the project that uses the version number.
+        -->
         <replace file="${intermediate.dir}/${project.name}/package.json" token='&quot;version&quot;: &quot;0.0.0&quot;' value='&quot;version&quot;: &quot;${project.version}&quot;' />
+        <replace file="${intermediate.dir}/${project.name}/Properties/AssemblyInfo.cs" token='AssemblyVersion(&quot;1.0.0.0&quot;)' value='AssemblyVersion(&quot;${project.version}.0&quot;)' />
+        <replace file="${intermediate.dir}/${project.name}/Properties/AssemblyInfo.cs" token='AssemblyFileVersion(&quot;1.0.0.0&quot;)' value='AssemblyFileVersion(&quot;${project.version}.0&quot;)' />
 
         <!--
             Swap Web.config used for serving configuration files to one that has
