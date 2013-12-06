@@ -134,6 +134,15 @@
             an aggressive caching strategy.
         -->
         <copy file="${build.dir}/server-configs/StaticFiles.Web.config" tofile="${intermediate.dir}/${project.name}/assets/Web.config" overwrite="true" />
+
+        <!--
+            Updates to the server side of the project via useful functions available
+            in NAnt, e.g. updating Web.config to not run server side code in debug
+            mode.
+        -->
+        <nant buildfile="${nant.buildfile}">
+            <target name="configuration" />
+        </nant>
     </target>
 
     <!--

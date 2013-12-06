@@ -59,6 +59,7 @@
         <!--
         Disable running in debug binaries.
         http://blogs.msdn.com/b/tess/archive/2006/04/13/575364.aspx
+        http://weblogs.asp.net/scottgu/archive/2006/04/11/Don_1920_t-run-production-ASP.NET-Applications-with-debug_3D001D20_true_1D20_-enabled.aspx
         -->
         <xmlpoke    file="${intermediate.dir}/${project.name}/Web.config"
                     xpath="/configuration/system.web/compilation/@debug"
