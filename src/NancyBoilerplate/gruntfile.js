@@ -90,8 +90,8 @@ module.exports = function(grunt) {
                          * loading a single JS file.
                          */
                         {
-                            pattern: '<script data-main="assets/js/config" src="assets/js/vendor/require.js"></script>',
-                            replacement: '<script src="assets/js/js-<%= pkg.version %>.js"></script>'
+                            pattern: '<script data-main="/assets/js/config" src="/assets/js/vendor/require.js"></script>',
+                            replacement: '<script src="/assets/js/js-<%= pkg.version %>.js"></script>'
                         },
 
                         /**
@@ -100,8 +100,8 @@ module.exports = function(grunt) {
                          * latest styles.
                          */
                         {
-                            pattern: '<link rel="stylesheet" href="assets/css/styles.css" />',
-                            replacement: '<link rel="stylesheet" href="assets/css/css-<%= pkg.version %>.css" />'
+                            pattern: '<link rel="stylesheet" href="/assets/css/styles.css" />',
+                            replacement: '<link rel="stylesheet" href="/assets/css/css-<%= pkg.version %>.css" />'
                         }
                     ]
                 }
