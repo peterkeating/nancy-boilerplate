@@ -10,7 +10,7 @@ namespace NancyBoilerplate.Tests.Integration.Core
         [Test]
         public void ConnectionString_ReturnsExpectedForEnvironmentMachineName()
         {
-            Assert.That(Config.ConnectionString, Is.EqualTo(ConfigurationManager.ConnectionStrings[Environment.MachineName].ConnectionString));
+            Assert.That(Config.ConnectionString, Is.EqualTo(ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["ConnectionStringName"]].ConnectionString));
         }
     }
 }
