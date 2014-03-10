@@ -88,6 +88,7 @@
     <Content Include="assets\css\styles.scss" />
     <Content Include="Views\404.cshtml" />
     <Content Include="Views\500.cshtml" />
+    <Content Include="connections.config" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <Content Include="assets\css\styles.css" />
     <Content Include="Web.config">
