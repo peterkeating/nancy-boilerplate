@@ -221,6 +221,7 @@
         -->
         <copy todir="${publish.dir}">
             <fileset dir="${intermediate.dir}/${project.name}">
+                <exclude name="/node_modules/**" />
                 <include name="**/*js-*.js" />
             </fileset>
         </copy>
