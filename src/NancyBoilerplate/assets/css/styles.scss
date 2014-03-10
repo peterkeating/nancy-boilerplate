@@ -7,14 +7,14 @@
 /**
  *  CONTENTS.......... You're reading them.
  *
- *  RESET............. Reset provided by normalize (http://necolas.github.io/normalize.css/)
+ *  NORMALIZE............. Reset provided by normalize (http://necolas.github.io/normalize.css/)
  */
 
 
 /**
  * -----------------------------------------------------------------------------
- *   $RESET
+ *   $NORMALIZE
  * -----------------------------------------------------------------------------
  */
 
-@import "partials/vendor/normalize";
+@import "vendor/normalize";
