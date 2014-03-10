@@ -86,6 +86,7 @@
   <ItemGroup>
     <Content Include="assets\css\partials\vendor\_normalize.scss" />
     <Content Include="assets\css\styles.scss" />
+    <Content Include="robots.txt" />
     <Content Include="Views\404.cshtml" />
     <Content Include="Views\500.cshtml" />
     <Content Include="connections.config" />
