@@ -11,7 +11,7 @@ namespace NancyBoilerplate.Core
         /// </summary>
         public static string ConnectionString
         {
-            get { return ConfigurationManager.ConnectionStrings[Environment.MachineName].ConnectionString; }
+            get { return ConfigurationManager.ConnectionStrings[ConfigurationManager.AppSettings["ConnectionStringName"]].ConnectionString; }
         }
     }
 }
